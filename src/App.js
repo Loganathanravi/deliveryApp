@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState} from "react";
+import Header from "./components/Layout/Header";
+import Meals from "./components/Meals/Meals";
+import Ordercard from "./components/Card/Ordercard";
+import Cardprovider from "./components/Store/Cardprovider";
 function App() {
+  const [cartshown,setshown]=useState(false)
+   const showCardHandler=()=>{
+    setshown(true)
+   }
+   const hideCardHandler=()=>{
+    setshown(false)
+   }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Cardprovider>
+     {cartshown && <Ordercard onCloseHandler={hideCardHandler}/>} 
+    <Header onShow={showCardHandler}/>
+    <main>
+      <Meals/>
+    </main>
+    </Cardprovider>
+  )
 }
 
 export default App;
